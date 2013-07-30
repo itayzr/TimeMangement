@@ -199,7 +199,7 @@
     <Content Include="Global.asax" />
     <None Include="js\libs\jquery\jquery-1.7.2.intellisense.js" />
     <Content Include="js\angular.js" />
-    <Content Include="js\controllers\workManageCtrl.js" />
+    <Content Include="js\controllers\WorkManageCtrl.js" />
     <Content Include="js\html5shiv.js" />
     <Content Include="js\jquery.timepicker.js" />
     <Content Include="js\jquery.timepicker.min.js" />
@@ -231,7 +231,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\WorkManage\Index1.cshtml" />
-    <Content Include="Views\WorkManage\Index.cshtml" />
+    <Content Include="Views\WorkManage\Index.cshtml">
+      <BrowseToURL>~/WorkManage/Index</BrowseToURL>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Raven.Imports.Newtonsoft.Json;
 using TimeMangement.Models;
 
 namespace TimeMangement.Controllers.Api
@@ -14,7 +15,7 @@ namespace TimeMangement.Controllers.Api
             DateTime day = date ?? DateTime.Today;
 
             var projects = new List<string> {"RavenDB", "RavenFS"}; //TODO: take from index in raven
-            var docId = String.Format("work/{0}/{1:0000}-{2:00}", username, day.Year, day.Month);
+            var docId = string.Format("work/{0}/{1:0000}-{2:00}", username, day.Year, day.Month);
             var month = RavenSession.Load<Month>(docId);
             if (month == null)
             {
@@ -30,7 +31,19 @@ namespace TimeMangement.Controllers.Api
 
             return month.Days[day];
         }
-// api/day/29-7-2013
+
+        [HttpPost]
+        public object Save(Day dayInput)
+        {
+            var username = User.Identity.Name.Split('@')[0];
+            var day = dayInput.Date;
+            var docId = String.Format("work/{0}/{1:0000}-{2:00}", username, day.Year, day.Month);
+            var month = RavenSession.Load<Month>(docId);
+            month.Days[day] = dayInput;
+            RavenSession.SaveChanges();
+            return new {Success = true};
+        }
+
 
     }
 }

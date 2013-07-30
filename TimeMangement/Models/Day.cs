@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
+using Raven.Imports.Newtonsoft.Json;
+using Raven.Imports.Newtonsoft.Json.Converters;
 
 namespace TimeMangement.Models
 {
     public enum Activity
     {
-        None,
+        Work,
         Holiday,
         HalfHoliday
     }
 
     public class TimeInfo
     {
-        public DateTime StartTime { get; set; }
-        public DateTime FinishTime { get; set; }
-
-        public double HoursRange()
-        {
-            //check for mins
-            return (FinishTime - StartTime).TotalHours;
-        }
+        /// <summary>
+        /// Format: HH:mm
+        /// </summary>
+        public string StartTime { get; set; }
+        public string FinishTime { get; set; }
     }
 
     public class Day
@@ -36,7 +36,7 @@ namespace TimeMangement.Models
         {
             Date = today.Date;
             Activities = new List<Activity> {new Activity()};
-            TimeInfos = new List<TimeInfo> {new TimeInfo()};
+            TimeInfos = new List<TimeInfo> {new TimeInfo(),new TimeInfo()};
             Projects= new List<string>();
         }
     }

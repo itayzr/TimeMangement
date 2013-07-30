@@ -1,97 +1,48 @@
-﻿<html>
-    <head>
-        <title>
-        </title>
-    </head>
-    <body>
-        <h2>Work Hours</h2>
+﻿
+<h2>Work Hours</h2>
+    <div ng-controller="WorkManagerCtrl" class="day-details">
         <form>
-            <div class="day-details">
-                <div class="editor-label">
-                    <label>Date</label>
-                </div>
-                <div class="editor-field">
-                    <input id="date" type="text" style="width: 105px;" />
-                </div>
-                <div class="editor-label">
-                    <label>Activities</label>
-                </div>
-                <div class="editor-field">
-                    <select id="activities" style="width: 120px;"> 
-                        <option value="None">None</option>
-                        <option value="Holiday">Holiday</option>
-                        <option value="HalfHoliday">HalfHoliday</option>
-                    </select>
-                </div>
-        
-                <div class="editor-label">
-                    <label>StartTime</label>
-                </div>
-                <div class="editor-field">
-                    <input id="start" type="text" style="width: 100px;" />
-                </div>
-                <div class="editor-label">
-                    <label>FinishTime</label>
-                </div>
-                <div class="editor-field">
-                    <input id="finish" type="text" style="width: 100px;" />
-                </div>
-
-                <div class="editor-label">
-                    <label>Projects</label>
-                </div>
-                <div class="editor-field">
-                    <input id="projects" type="text" style="width: 100px;" />
-                </div>
-                <div class="editor-label">
-                    <label>Description</label>
-                </div>
-                <div class="editor-field">
-                    <input id="description" type="text" style="width: 100px;" />
-                </div>   
-            </div>
+            <label>Date</label>
+            <input type="date" ng-model="selectedDay"/>
+               
+            <label>Activities</label>
+            <select id="activities" ng-model="day.Activities"> 
+                    <option value="Work">Work</option>
+                    <option value="Holiday">Holiday</option>
+                    <option value="HalfHoliday">HalfHoliday</option>
+                </select>
+            <li ng-repeat="timeInfo in day.TimeInfos">
+                <label>StartTime</label>
+                <input id="start" type="time" name="startTime" ng-model="timeInfo.StartTime"/>
+                <label>FinishTime</label>
+                <input id="finish" type="time" name="finishTime" ng-model="timeInfo.FinishTime"/>
+            </li>
+            <input class="btn-primary" ng-click="AddHours()" type="submit" value="Add Hours">
+            <input class="btn-primary" ng-click="DelHours()" type="submit" value="Delete Hours">
+            <label>Projects</label>
+            <input id="projects" type="text" ng-model="day.Projects"/>
+            <label>Description</label>
+            <input id="description" type="text"ng-model="day.Description" />
+            <input class="btn-primary" ng-click="Save()" type="submit" value="Save">
         </form>
-        <div id='calendar' class="calendar"></div>
-    </body>
-</html>
+    </div>
+    <div id='calendar' class="calendar"></div> 
 
 @section FooterSection
 {
-<script src="~/js/angular.js"></script>
-<script src="~/js/libs/jquery/jquery-1.10.1.js"></script>
-<script src="~/js/jquery.timepicker.js"></script>
-<script src="~/js/libs/zebra_datepicker.js"></script>
-<script src="~/js/libs/jquery/fullcalendar.min.js"></script>
-<link href="~/css/default.css" rel="stylesheet" />
-<link href="~/css/libs/jquery.timepicker.css" rel="stylesheet" />
-<link href="~/css/fullcalendar.css" rel="stylesheet" />
-<link href="~/css/fullcalendar.print.css" rel="stylesheet" />
+    <script src="~/js/angular.js"></script>
+    <script src="~/js/controllers/WorkManageCtrl.js"></script>
+    <script src="~/js/libs/jquery/jquery-1.10.1.js"></script>
+    <script src="~/js/jquery.timepicker.js"></script>
+    <script src="~/js/libs/zebra_datepicker.js"></script>
+    <script src="~/js/libs/jquery/fullcalendar.min.js"></script>
+    <link href="~/css/default.css" rel="stylesheet" />
+    <link href="~/css/libs/jquery.timepicker.css" rel="stylesheet" />
+    <link href="~/css/fullcalendar.css" rel="stylesheet" />
+    <link href="~/css/fullcalendar.print.css" rel="stylesheet" />
 <script>
     $(document).ready(function () {
 
-        if ($("#date").val() == "01/01/0001") {
-            var today = new Date();
-            $('#date').val(today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
-        }
-
-        $('#date').Zebra_DatePicker({
-            first_day_of_week: 0,
-            format: "d/m/Y",
-            readonly_element: false,
-            weekend_days: [],
-            onSelect: function (date, date2) {
-
-                var apiUrl = "api/WorkManageApi/date?=" + date2;
-                $.get(apiUrl, function(value) {
-                    alert("Data Loaded: " + value.TimeInfos[0].StartTime);
-                }, "json");
-            }
-        });
-
-         $('#start').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
-         $('#finish').timepicker({ 'timeFormat': 'H:i', 'step': 15 });
-
-       
         $('#calendar').fullCalendar({
             selectable: true,
             select: function(startDate) {
@@ -100,47 +51,13 @@
                 return false;
             }
         });
-
-     
-
-        $("#save").click(function() {
-            debugger;
-            var dateParts = $("#date").val().split("/");
-            var date = new Date(dateParts[2], (dateParts[1]-1), dateParts[0]);
-            date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
-            saveday.Date = date;
-            for (var i=0;i<saveday.TimeInfos.length;i++) {
-                saveday.TimeInfos[i].StartTime = $('#start' + i).val();
-                saveday.TimeInfos[i].FinishTime = $('#finish' + i).val();
-            }
-            for (var i=0;i<saveday.Activities.length;i++) {
-                saveday.Activities[i]= $("#activities").val();
-            }
-            saveday.Description= $("#description").val();
-            //saveday.projects = $("#Projects").val();
-            $.ajax({
-                url: '/workmanage/save',
-                data: { 'saveday': JSON.stringify(saveday)},
-                type: 'POST',
-                dataType: 'json',
-                success: function() {
-                    debugger;
-                },
-                error: function() {
-                    alert("an error has occurred");
-                }
-            });
-            
-            return false;
-
-        });
     });
 
 </script>
 
 <style>
 	#calendar {
-		width: 400px;
+		width: 350px;
 		margin: 0 auto;
 		}
 

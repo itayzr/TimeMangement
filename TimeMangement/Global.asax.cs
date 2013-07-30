@@ -1,15 +1,10 @@
-﻿using System.Web;
+﻿using System.Net.Http.Formatting;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Raven.Client;
-using Raven.Client.Document;
-using Raven.Client.MvcIntegration;
-using Raven.Imports.Newtonsoft.Json;
-using Raven.Imports.Newtonsoft.Json.Converters;
-using TimeMangement.Controllers;
+using Newtonsoft.Json.Converters;
 using TimeMangement.Helpers;
-using TimeMangement.Models;
 
 namespace TimeMangement
 {
@@ -24,7 +19,10 @@ namespace TimeMangement
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
+            
+            JsonMediaTypeFormatter jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            // jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonFormatter.SerializerSettings.Converters.Add(new StringEnumConverter());
             DocumentStoreHolder.Initialize();
         }
 

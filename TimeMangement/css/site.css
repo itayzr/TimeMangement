@@ -1505,11 +1505,11 @@ hr {
 
 .day-details {
     float: left;
+    width: 250px
 }
 
 .calendar {
     float: left;
-    padding-left: 50px;
 }
 
 .hours {
