@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Permission denied";
+}
+
+                        <div class="cols" style="margin-left: 10px; margin-top: 5px;">
+							<div class="main-col">
+                                
+                                <h1>Permission denied</h1>
+
+                                <p>You don't have permissions to view the page you were trying to access.</p>
+
+								<p>If you think you shouldn't have got this message, please contact us at support (at) Hibernatingrhinos.com.</p>
+								
+								If you could like to change the user @Html.ActionLink("Press here", "ChangeUser",new{ReturnUrl = Request.QueryString["ReturnUrl"]})
+
+							</div>
+						</div>

@@ -1,0 +1,54 @@
+﻿<!doctype html>
+<html lang="en" ng-app>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Hibernating Rhinos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Consulting, Architecture and Best Practices for Zero Friction Development">
+        <meta name="Robots" content="index,follow">
+        <!--[if lt IE 9]>
+            <script src="@Url.Content("~/js/html5shiv.js")"></script>
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/libs/TwitterBootstrap/bootstrap.min.css")">
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/libs/font-awesome.css")">
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/css/site.css")">
+        @RenderSection("HeadSection", false)
+    </head>  
+    <body lang="en" ng-app="mainApp">
+    <div id="wrapper">
+        <header id="header">
+            <div class="header-holder">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="logout" style="text-align: right">			
+                        <p style="color: #e79a2a">Hello @User.Identity.Name, @Html.ActionLink("Log out", "LogOut", "Account")</p> 	
+                    </div>
+                }
+                <div class="header-frame">
+                    <h1 class="logo">@Html.ActionLink("Hibernating Rhinos", "Index", "Home")</h1>
+                    <div class="slogan"><span>Work hours management</span></div>
+                </div>
+                
+            </div>
+        </header>
+        <div id="main">
+			<section id="content">
+				<article class="content">
+					<div class="content-inner">
+				        @RenderBody()
+					</div>
+				</article>
+			</section>
+        </div>
+
+    </div>
+        @RenderSection("FooterSection", false)
+</body>
+</html>
+<!--
+
+        Third party libraries:
+        
+        Font Awesome - http://fortawesome.github.com/Font-Awesome
+        -->

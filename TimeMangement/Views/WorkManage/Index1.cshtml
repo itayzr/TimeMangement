@@ -1,0 +1,196 @@
+﻿@using TimeMangement.Helpers
+@using TimeMangement.Models
+@model TimeMangement.Models.Day
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/js/angular.js"></script>
+<h2>Work Hours</h2>
+<form>
+    <div class="day-details">
+        <fieldset>
+            <legend></legend>
+            <div class="editor-label">
+                <label>Date</label>
+                @Html.LabelFor(model => model.Date)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Date, new { id = "date", @Value = Model.Date.ToString("dd/MM/yyyy"), @style = "width: 105px;" })
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+              
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Activities)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.Activities, new SelectList(Enum.GetValues(typeof(Activity))), new { id = "activities", @style = "width: 120px;" })
+                @Html.ValidationMessageFor(model => model.Activities)
+            </div>
+            <div id='hours' class="hours">
+            @for (var i = 0; i < Model.TimeInfos.Count; i++)
+            {
+                <div class="editor-label">
+                    @Html.LabelFor(model => Model.TimeInfos[i].StartTime)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => Model.TimeInfos[i].StartTime, new { id = "start" + i, @Value = Model.TimeInfos[i].StartTime.ToString("HH:mm"), @style = "width: 100px;" })
+                    @Html.ValidationMessageFor(model => Model.TimeInfos[i].StartTime)
+                </div>
+        
+                <div class="editor-label">
+                    @Html.LabelFor(model => Model.TimeInfos[i].FinishTime)
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => Model.TimeInfos[i].FinishTime, new { id = "finish" + i, @Value = Model.TimeInfos[i].FinishTime.ToString("HH:mm"), @style = "width: 100px;" })
+                    @Html.ValidationMessageFor(model => Model.TimeInfos[i].FinishTime)
+                </div>
+            }
+            </div>
+            <input id="addHours" type="submit" value="Add new hours" /> 
+            <input id="deleteHours" type="submit" value="Delete hours">         
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Projects)
+            </div>
+            <div class="editor-field">
+                @Html.ListBoxFor(model => model.Projects, new List<SelectListItem>(), new { id = "projects", @style = "width: 120px;" })
+                @Html.ValidationMessageFor(model => model.Projects)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.Description, new { id = "description", @style = "width: 120px;" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            
+            <input id="save" type="submit" value="Save" />          
+        </fieldset>
+    </div>
+    <div id='calendar' class="calendar"></div>
+</form>
+
+@section FooterSection
+{
+<script src="~/js/libs/jquery/jquery-1.10.1.js"></script>
+<script src="~/js/jquery.timepicker.js"></script>
+<script src="~/js/libs/zebra_datepicker.js"></script>
+<script src="~/js/libs/jquery/fullcalendar.min.js"></script>
+<link href="~/css/default.css" rel="stylesheet" />
+<link href="~/css/libs/jquery.timepicker.css" rel="stylesheet" />
+<link href="~/css/fullcalendar.css" rel="stylesheet" />
+<link href="~/css/fullcalendar.print.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        var saveday = @Html.ToJson(Model);
+        
+
+
+        
+        if ($("#date").val() == "01/01/0001") {
+            var today = new Date();
+            $('#date').val(today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
+        }
+        
+
+
+        $('#date').Zebra_DatePicker({
+            first_day_of_week: 0,
+            format: "d/m/Y",
+            readonly_element: false,
+            weekend_days: [],
+            onSelect: function(date, date2) {
+                window.location = "/workmanage/index?date=" + date2;
+            }
+        });
+        
+        $("#addHours").click(function() {
+            
+            var size = saveday.TimeInfos.length;
+            $("#hours").append('<label>StartTime</label>');
+            $("#hours").append('<input type="text" style="width: 100px;" id="start'+size+'" data-val-required="The StartTime field is required." data-val-date="The field StartTime must be a date." data-val="true" value="00:00" autocomplete="off" class="ui-timepicker-input">');        
+            $('#start'+size).timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+            $("#hours").append('<label>FinishTime</label>');
+            $("#hours").append('<input type="text" style="width: 100px;"  id="finish'+size+'" data-val-required="The FinishTime field is required." data-val-date="The field FinishTime must be a date." data-val="true" value="00:00" autocomplete="off" class="ui-timepicker-input">');
+            $('#finish'+size).timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+           /* $("#hours").append('<input id="deleteHours" type="submit" value="Delete hours">');*/
+            var obj = {};
+            obj.StartTime = "00:00";
+            obj.FinishTime = "00:00";
+            saveday.TimeInfos.push(obj);
+            return false;
+        });
+        
+        $("#deleteHours").click(function() {
+            var size = saveday.TimeInfos.length-1;
+            debugger;
+            if (size == 0)
+                alert("can't delete");
+            else {
+                $('#start'+size).remove();
+                $('#finish'+size).remove();
+                saveday.TimeInfos.pop();
+            }
+            return false;
+        });
+        for (var i=0;i<saveday.TimeInfos.length;i++)
+        {     
+            $('#start'+i).timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+            $('#finish'+i).timepicker({ 'timeFormat': 'H:i', 'step': 15 });
+        }
+       
+        $('#calendar').fullCalendar({
+            selectable: true,
+            select: function(startDate) {
+                var time = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
+                window.location = "/workmanage/index?date=" + time;
+                return false;
+            }
+        });
+
+     
+
+        $("#save").click(function() {
+            debugger;
+            var dateParts = $("#date").val().split("/");
+            var date = new Date(dateParts[2], (dateParts[1]-1), dateParts[0]);
+            date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
+            saveday.Date = date;
+            for (var i=0;i<saveday.TimeInfos.length;i++) {
+                saveday.TimeInfos[i].StartTime = $('#start' + i).val();
+                saveday.TimeInfos[i].FinishTime = $('#finish' + i).val();
+            }
+            for (var i=0;i<saveday.Activities.length;i++) {
+                saveday.Activities[i]= $("#activities").val();
+            }
+            saveday.Description= $("#description").val();
+            //saveday.projects = $("#Projects").val();
+            $.ajax({
+                url: '/workmanage/save',
+                data: { 'saveday': JSON.stringify(saveday)},
+                type: 'POST',
+                dataType: 'json',
+                success: function() {
+                    debugger;
+                },
+                error: function() {
+                    alert("an error has occurred");
+                }
+            });
+            
+            return false;
+
+        });
+    });
+
+</script>
+
+<style>
+	#calendar {
+		width: 400px;
+		margin: 0 auto;
+		}
+
+</style>
+}

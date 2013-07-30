@@ -1,0 +1,41 @@
+﻿@model TimeMangement.Models.LogOnModel
+@{
+	ViewBag.Title = "Log In";
+}
+<div class="cols">
+	<div class="main-col" style="margin-left: 10px; margin-top: 5px;">
+		<h1>
+			Log In</h1>
+		<p>
+			Please enter your user name and password. @Html.ActionLink("Register", "Register", new { ReturnUrl = Request.QueryString["ReturnUrl"] })
+			if you don't have an account.</p>
+		<p>@Html.ActionLink("I forgot my password", "ForgotPassword")</p>
+		@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+		@using (Html.BeginForm())
+  {
+			<div class="inputform">
+				<fieldset>
+					<legend>Account Information</legend>
+					<div class="editor">
+						@Html.LabelFor(model => model.Login)
+						@Html.TextBoxFor(model => model.Login, new {type="email"})
+						@Html.ValidationMessageFor(model => model.Login)
+					</div>
+					<br/>
+					<div class="editor">
+						@Html.LabelFor(model => model.Password)
+						@Html.PasswordFor(model => model.Password)
+						@Html.ValidationMessageFor(model => model.Password)
+					</div>
+					<br/>
+					@Html.EditorFor(m => m.RememberMe)
+					<div class="submit_button">
+						<input type="submit" value="Log In" />
+					</div>
+				</fieldset>
+			</div>
+  }
+	</div>
+</div>
+	<script src="@Url.Content("~/js/libs/jquery/jquery.validate.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/js/libs/jquery/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
