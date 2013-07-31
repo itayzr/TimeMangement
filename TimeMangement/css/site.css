@@ -1510,6 +1510,7 @@ hr {
 
 .calendar {
     float: left;
+    width: 450px
 }
 
 .hours {

@@ -27,7 +27,7 @@ namespace TimeMangement.Models
     public class Day
     {
         public DateTime Date { get; set; }
-        public List<Activity> Activities { get; set; } 
+        public Activity Activity { get; set; } 
         public List<TimeInfo> TimeInfos { get; set; } 
         public List<string> Projects { get; set; }
         public string Description { get; set; }
@@ -35,8 +35,7 @@ namespace TimeMangement.Models
         public Day(DateTime today)
         {
             Date = today.Date;
-            Activities = new List<Activity> {new Activity()};
-            TimeInfos = new List<TimeInfo> {new TimeInfo(),new TimeInfo()};
+            TimeInfos = new List<TimeInfo> {new TimeInfo()};
             Projects= new List<string>();
         }
     }

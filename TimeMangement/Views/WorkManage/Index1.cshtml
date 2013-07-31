@@ -21,11 +21,11 @@
             </div>
               
             <div class="editor-label">
-                @Html.LabelFor(model => model.Activities)
+                @Html.LabelFor(model => model.Activity)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(model => model.Activities, new SelectList(Enum.GetValues(typeof(Activity))), new { id = "activities", @style = "width: 120px;" })
-                @Html.ValidationMessageFor(model => model.Activities)
+                @Html.DropDownListFor(model => model.Activity, new SelectList(Enum.GetValues(typeof(Activity))), new { id = "activities", @style = "width: 120px;" })
+                @Html.ValidationMessageFor(model => model.Activity)
             </div>
             <div id='hours' class="hours">
             @for (var i = 0; i < Model.TimeInfos.Count; i++)

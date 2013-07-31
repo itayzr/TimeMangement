@@ -1,65 +1,41 @@
-﻿
-<h2>Work Hours</h2>
-    <div ng-controller="WorkManagerCtrl" class="day-details">
-        <form>
-            <label>Date</label>
-            <input type="date" ng-model="selectedDay"/>
+﻿<h2>Work Hours</h2>
+<div ng-controller="WorkManagerCtrl" class="day-details">
+    <form>
+        <label>Date</label>
+        <input type="date" ng-model="selectedDay"/>
                
-            <label>Activities</label>
-            <select id="activities" ng-model="day.Activities"> 
-                    <option value="Work">Work</option>
-                    <option value="Holiday">Holiday</option>
-                    <option value="HalfHoliday">HalfHoliday</option>
-                </select>
-            <li ng-repeat="timeInfo in day.TimeInfos">
-                <label>StartTime</label>
-                <input id="start" type="time" name="startTime" ng-model="timeInfo.StartTime"/>
-                <label>FinishTime</label>
-                <input id="finish" type="time" name="finishTime" ng-model="timeInfo.FinishTime"/>
-            </li>
-            <input class="btn-primary" ng-click="AddHours()" type="submit" value="Add Hours">
-            <input class="btn-primary" ng-click="DelHours()" type="submit" value="Delete Hours">
-            <label>Projects</label>
-            <input id="projects" type="text" ng-model="day.Projects"/>
-            <label>Description</label>
-            <input id="description" type="text"ng-model="day.Description" />
-            <input class="btn-primary" ng-click="Save()" type="submit" value="Save">
-        </form>
-    </div>
-    <div id='calendar' class="calendar"></div> 
+        <label>Activities</label>
+        <select ng-model="day.Activity">
+            <option value="Work">Work</option>
+            <option value="Holiday">Holiday</option>
+            <option value="HalfHoliday">HalfHoliday</option>
+        </select>
+
+        <li ng-repeat="timeInfo in day.TimeInfos" style="list-style: none; ">
+            <label>StartTime</label>
+            <input id="start" type="time" name="startTime" ng-model="timeInfo.StartTime"/>
+            <label>FinishTime</label>
+            <input id="finish" type="time" name="finishTime" ng-model="timeInfo.FinishTime"/>
+        </li>
+
+        <input class="btn-primary" ng-click="AddHours()" type="submit" value="Add Hours">
+        <input class="btn-primary" ng-click="DelHours()" type="submit" value="Delete Hours">
+        <label>Projects</label>
+        <input id="projects" type="text" ng-model="day.Projects"/>
+        <label>Description</label>
+        <input id="description" type="text"ng-model="day.Description" />
+        <input class="btn-primary" ng-click="Save()" type="submit" value="Save">
+    </form>
+</div>
+<section id="directives-calendar" ng-controller="CalendarCtrl" >
+    <div ui-calendar="uiConfig.calendar" ng-model="eventSources" class="calendar" >
+</section>
+
+
+
 
 @section FooterSection
 {
-    <script src="~/js/angular.js"></script>
-    <script src="~/js/controllers/WorkManageCtrl.js"></script>
-    <script src="~/js/libs/jquery/jquery-1.10.1.js"></script>
-    <script src="~/js/jquery.timepicker.js"></script>
-    <script src="~/js/libs/zebra_datepicker.js"></script>
-    <script src="~/js/libs/jquery/fullcalendar.min.js"></script>
-    <link href="~/css/default.css" rel="stylesheet" />
-    <link href="~/css/libs/jquery.timepicker.css" rel="stylesheet" />
-    <link href="~/css/fullcalendar.css" rel="stylesheet" />
-    <link href="~/css/fullcalendar.print.css" rel="stylesheet" />
-<script>
-    $(document).ready(function () {
 
-        $('#calendar').fullCalendar({
-            selectable: true,
-            select: function(startDate) {
-                var time = startDate.getFullYear() + "-" + (startDate.getMonth() + 1) + "-" + startDate.getDate();
-                window.location = "/workmanage/index?date=" + time;
-                return false;
-            }
-        });
-    });
 
-</script>
-
-<style>
-	#calendar {
-		width: 350px;
-		margin: 0 auto;
-		}
-
-</style>
 }
