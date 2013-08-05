@@ -137,7 +137,7 @@ form, fieldset{
 	padding:0 0 28px;
 }
 #content{
-	width:750px;
+	width:900px;
 	float:right;
 	margin-right:1px;
 	background: url(../imgs/bg-products.gif) no-repeat;
@@ -1086,7 +1086,7 @@ article.contentPage a
 }
 .content-inner {
 	padding:20px;
-	width: 711px;
+	width: 850px;
 	margin:0 -70px 0 0;
 }
 
@@ -1510,7 +1510,7 @@ hr {
 
 .calendar {
     float: left;
-    width: 450px
+    width: 600px
 }
 
 .hours {

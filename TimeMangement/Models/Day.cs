@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
-using Raven.Imports.Newtonsoft.Json;
-using Raven.Imports.Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
 
 namespace TimeMangement.Models
 {
@@ -40,10 +36,12 @@ namespace TimeMangement.Models
         }
     }
 
+    [CollectionDataContractAttribute]
     public class Month
     {
         public string Id { get; set; }
         public string UserName { get; set; }
+
         public Dictionary<DateTime, Day> Days { get; set; }
 
         public Month()

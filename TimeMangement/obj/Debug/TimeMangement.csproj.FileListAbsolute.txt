@@ -105,6 +105,6 @@ C:\Work\My\TimeMangement\TimeMangement\bin\System.Web.Mvc.xml
 C:\Work\My\TimeMangement\TimeMangement\bin\System.Web.WebPages.xml
 C:\Work\My\TimeMangement\TimeMangement\bin\System.Web.WebPages.Deployment.xml
 C:\Work\My\TimeMangement\TimeMangement\bin\System.Web.WebPages.Razor.xml
-C:\Work\My\TimeMangement\TimeMangement\obj\Debug\TimeMangement.csprojResolveAssemblyReference.cache
 C:\Work\My\TimeMangement\TimeMangement\obj\Debug\TimeMangement.dll
 C:\Work\My\TimeMangement\TimeMangement\obj\Debug\TimeMangement.pdb
+C:\Work\My\TimeMangement\TimeMangement\obj\Debug\TimeMangement.csprojResolveAssemblyReference.cache

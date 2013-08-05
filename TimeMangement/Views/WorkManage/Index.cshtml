@@ -1,16 +1,18 @@
 ﻿<h2>Work Hours</h2>
-<div ng-controller="WorkManagerCtrl" class="day-details">
+<div ng-controller="WorkManagerCtrl">
+<div class="day-details">
     <form>
         <label>Date</label>
-        <input type="date" ng-model="selectedDay"/>
-               
+        <input type="date" value="{{day.Date|date:'yyyy-MM-dd'}}"  />
+        <input type="text" ng-model="day.Date"  class="datepicker" >
+        {{day.Date|date:'yyyy-MM-dd'}}  
         <label>Activities</label>
         <select ng-model="day.Activity">
             <option value="Work">Work</option>
             <option value="Holiday">Holiday</option>
             <option value="HalfHoliday">HalfHoliday</option>
         </select>
-
+        
         <li ng-repeat="timeInfo in day.TimeInfos" style="list-style: none; ">
             <label>StartTime</label>
             <input id="start" type="time" name="startTime" ng-model="timeInfo.StartTime"/>
@@ -21,15 +23,29 @@
         <input class="btn-primary" ng-click="AddHours()" type="submit" value="Add Hours">
         <input class="btn-primary" ng-click="DelHours()" type="submit" value="Delete Hours">
         <label>Projects</label>
-        <input id="projects" type="text" ng-model="day.Projects"/>
+                
+         <input ui-select2="version3" ng-model="version3model" style="width:220px" />
+
+        @*        <input id="projects" type="text" ng-model="newProject"  placeholder="add new project here"/>*@
+@*        <input class="btn-primary" type="submit" ng-click="AddProjects()" value="Add">*@
+
+        <ul class="unstyled">         
+            <li ng-repeat="projects in day.Projects">
+                <span>{{projects}}</span>
+            </li>
+        </ul>
         <label>Description</label>
         <input id="description" type="text"ng-model="day.Description" />
         <input class="btn-primary" ng-click="Save()" type="submit" value="Save">
+
+      
+        
+
     </form>
 </div>
-<section id="directives-calendar" ng-controller="CalendarCtrl" >
     <div ui-calendar="uiConfig.calendar" ng-model="eventSources" class="calendar" >
-</section>
+
+</div>
 
 
 
@@ -37,5 +53,12 @@
 @section FooterSection
 {
 
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+        });
+
+      
+    </script>
 
 }

@@ -97,6 +97,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0-beta2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -191,6 +192,7 @@
     <Content Include="css\fullcalendar.print.css" />
     <Content Include="css\libs\bootstrap.css" />
     <Content Include="css\libs\calendarDemo.css" />
+    <Content Include="css\libs\datepicker.css" />
     <Content Include="css\libs\font-awesome.css" />
     <Content Include="css\libs\jquery.timepicker.css" />
     <Content Include="css\libs\TwitterBootstrap\bootstrap.min.css" />
@@ -200,12 +202,13 @@
     <Content Include="css\site.css" />
     <Content Include="Global.asax" />
     <None Include="js\libs\jquery\jquery-1.7.2.intellisense.js" />
+    <Content Include="js\angular-ui\select2.js" />
     <Content Include="js\angular.js" />
-    <Content Include="js\controllers\CalendarCtrl.js" />
+    <Content Include="js\bootstrap-datepicker.js" />
     <Content Include="js\controllers\WorkManageCtrl.js" />
     <Content Include="js\html5shiv.js" />
+    <Content Include="js\libs\bootstrap.js" />
     <Content Include="js\libs\calendar.js" />
-    <Content Include="js\libs\calendarDemo.js" />
     <Content Include="js\libs\fullcalendar.js" />
     <Content Include="js\libs\gcal.js" />
     <Content Include="js\libs\jquery-ui.js" />
@@ -219,7 +222,8 @@
     <Content Include="js\libs\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="js\libs\jquery\jquery.validate.unobtrusive.min.js" />
     <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
-    <Content Include="js\WorkManagmentApp.js" />
+    <Content Include="css\select2.css" />
+    <Content Include="js\select2.js" />
     <Content Include="Scripts\jquery-1.4.4.js" />
     <Content Include="Scripts\jquery-1.4.4.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -271,9 +275,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>js\controllers\CalendarCtrl.js</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
