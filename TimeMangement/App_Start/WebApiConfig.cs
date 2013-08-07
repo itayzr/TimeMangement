@@ -15,6 +15,11 @@ namespace TimeMangement
                 defaults: null
             );
 
+            config.Routes.MapHttpRoute(
+            name: "ApiByAction",
+            routeTemplate: "api/{controller}/{action}",
+            defaults: new { action = "Get" }
+        );
         }
     }
 }

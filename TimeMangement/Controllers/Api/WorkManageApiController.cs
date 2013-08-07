@@ -30,12 +30,14 @@ namespace TimeMangement.Controllers.Api
             }
 
             if (month.Days.ContainsKey(day) == false)
-                month.Days.Add(day, new Day(day));
+                return new Day(day);
+                //month.Days.Add(day, new Day(day));
+                
 
             return month.Days[day];
         }
 
-       public Month GetMonth(DateTime? monthReturn = null)
+        public Month GetMonth(DateTime? monthReturn = null)
         {
             var username = User.Identity.Name.Split('@')[0];
             DateTime day = monthReturn ?? DateTime.Today;
@@ -54,7 +56,12 @@ namespace TimeMangement.Controllers.Api
            return month;
         }
 
-
+        public List<string> GetProjects()
+        {
+            var projects=new List<string> {"Raven3","newProject"};
+            return projects;
+        }
+            
         [HttpPost]
         public object Save(Day dayInput)
         {

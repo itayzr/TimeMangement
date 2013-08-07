@@ -209,6 +209,7 @@
     <Content Include="js\html5shiv.js" />
     <Content Include="js\libs\bootstrap.js" />
     <Content Include="js\libs\calendar.js" />
+    <Content Include="js\libs\Copy of calendar.js" />
     <Content Include="js\libs\fullcalendar.js" />
     <Content Include="js\libs\gcal.js" />
     <Content Include="js\libs\jquery-ui.js" />
