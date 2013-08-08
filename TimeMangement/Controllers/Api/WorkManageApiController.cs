@@ -33,9 +33,9 @@ namespace TimeMangement.Controllers.Api
                 return new Day(day);
                 //month.Days.Add(day, new Day(day));
                 
-
             return month.Days[day];
-        }
+         }
+
 
         public Month GetMonth(DateTime? monthReturn = null)
         {
@@ -73,6 +73,9 @@ namespace TimeMangement.Controllers.Api
             RavenSession.SaveChanges();
             return new {Success = true};
         }
+
+
+
 
 
     }

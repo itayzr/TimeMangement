@@ -34,22 +34,20 @@
             
         };
         
-        $scope.SetFinishTime = function () {
-            debugger;
-            size = $scope.day.TimeInfos.length - 1;
-            $scope.day.TimeInfos[size].FinishTime = $scope.day.TimeInfos[size].StartTime;
-            (finish+size).min = $scope.day.TimeInfos[size].StartTime;
-        };
-
-        $scope.AddHours = function() {
+        $scope.AddHours = function () {
             $scope.day.TimeInfos.push({ StartTime: '', FinishTime: '' });
-            size = $scope.day.TimeInfos.length - 1;
-            $scope.day.TimeInfos[size].StartTime = $scope.day.TimeInfos[size-1].FinishTime;
-            (start+size).min = $scope.day.TimeInfos[size].FinishTime;
+            var size = $scope.day.TimeInfos.length - 1;
+            $scope.day.TimeInfos[size].StartTime = $scope.day.TimeInfos[size - 1].FinishTime;
+            $scope.day.TimeInfos[size].FinishTime = $scope.day.TimeInfos[size - 1].FinishTime;
         };
 
-        $scope.DelHours = function() {
+        $scope.DelHours = function () {
             $scope.day.TimeInfos.pop();
+        };
+        
+        $scope.showDel = function () {
+            if ($scope.day.TimeInfos.length > 1)
+                return true;
         };
 
         $scope.Save = function() {
@@ -61,8 +59,19 @@
             $http.post("/api/WorkManageApi/Save/dayInput?=", $scope.day).success(function () {
                 $scope.myCalendar.fullCalendar('refetchEvents');
                 buildProjects();
+            });  
+        };
+
+        $scope.submit = function() {
+            projects.length = 0;
+            angular.forEach($scope.day.Projects, function(project, index) {
+                projects.push(project.text);
             });
-            
+            angular.copy(projects, $scope.day.Projects);
+            $http.post("/api/WorkManageApi/Save/dayInput?=", $scope.day).success(function() {
+                $scope.myCalendar.fullCalendar('refetchEvents');
+                buildProjects();
+            });
         };
 
         $scope.events = days;

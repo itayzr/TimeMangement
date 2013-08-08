@@ -1,7 +1,7 @@
 ﻿<h2>Work Hours</h2>
 <div ng-controller="WorkManagerCtrl">
 <div class="day-details">
-    <form name='myform'>
+    <form  ng-submit="submit()">
         <label>Date</label>
         <input type="date" ng-model="selectedDay" ng-change="ChangeDay()"  >
         <label>Activities</label>
@@ -13,21 +13,21 @@
         
         <li ng-repeat="timeInfo in day.TimeInfos" style="list-style: none; ">
             <label>StartTime</label>
-            <input id="start {{$index}}" type="time" name="startTime" ng-model="timeInfo.StartTime" ng-change="SetFinishTime()" required/>
+            <input id="start-{{$index}}" type="time" name="startTime" ng-model="timeInfo.StartTime"  required/>
             <label>FinishTime</label>
-            <input id="finish {{$index}}" type="time" name="finishTime" ng-model="timeInfo.FinishTime" min="" required/>           
+            <input id="finish-{{$index}}" type="time" name="finishTime" ng-model="timeInfo.FinishTime" min="{{timeInfo.StartTime}}" required/>           
         </li>
-
-        <input class="btn-primary" ng-click="AddHours()" type="submit" value="Add Hours">
-        <input class="btn-primary" ng-click="DelHours()" type="submit" value="Delete Hours">
-
+        <input type="button" ng-click="AddHours()" class="btn-primary" value="Add Hours"/>
+        <input type="button" ng-click="DelHours()" class="btn-primary" value="Delete Hours" ng-show="showDel()"/>
         <label>Projects</label>       
         <input ui-select2="selcetUi" ng-model="day.Projects" style="width:220px"/>
 
         <label>Description</label>
         <input id="description" type="text" ng-model="day.Description" />
-        <input class="btn-primary" ng-click="Save()" type="submit" value="Save" ng-disabled="!myform.$valid">
+        <input type="submit" id="submit" class="btn-primary" value="Save"/>
     </form>
+    
+
 </div>
     <div ui-calendar="uiConfig.calendar" ng-model="eventSources" class="calendar" calendar="myCalendar" >
 
