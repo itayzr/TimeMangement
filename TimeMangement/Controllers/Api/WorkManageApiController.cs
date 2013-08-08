@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Web.Http;
 using Raven.Imports.Newtonsoft.Json;
+using TimeMangement.Indexes;
 using TimeMangement.Models;
 
 
@@ -58,10 +60,14 @@ namespace TimeMangement.Controllers.Api
 
         public List<string> GetProjects()
         {
-            var projects=new List<string> {"Raven3","newProject"};
+            List<string> projects = RavenSession.Query<Projects_Tags.ReduceResult, Projects_Tags>()
+                .OrderBy(x => x.Count)
+                .ToList()
+                .Select(x=>x.Project)
+                .ToList();
             return projects;
         }
-            
+
         [HttpPost]
         public object Save(Day dayInput)
         {

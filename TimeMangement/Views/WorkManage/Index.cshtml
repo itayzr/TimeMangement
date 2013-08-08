@@ -3,28 +3,30 @@
 <div class="day-details">
     <form  ng-submit="submit()">
         <label>Date</label>
-        <input type="date" ng-model="selectedDay" ng-change="ChangeDay()"  >
-        <label>Activities</label>
-        <select ng-model="day.Activity">
-            <option value="Work">Work</option>
-            <option value="Holiday">Holiday</option>
-            <option value="HalfHoliday">HalfHoliday</option>
-        </select>
-        
+        <input type="date" ng-model="selectedDay" ng-change="ChangeDay()"  > 
         <li ng-repeat="timeInfo in day.TimeInfos" style="list-style: none; ">
+            <label>Activities</label>
+            <select ng-model="timeInfo.Activity">
+                <option value="Work">Work</option>
+                <option value="Holiday">Holiday</option>
+                <option value="HalfHoliday">HalfHoliday</option>
+            </select>
             <label>StartTime</label>
-            <input id="start-{{$index}}" type="time" name="startTime" ng-model="timeInfo.StartTime"  required/>
+            <input type="time" name="startTime" ng-model="timeInfo.StartTime"  required/>
             <label>FinishTime</label>
-            <input id="finish-{{$index}}" type="time" name="finishTime" ng-model="timeInfo.FinishTime" min="{{timeInfo.StartTime}}" required/>           
+            <input type="time" name="finishTime" ng-model="timeInfo.FinishTime" min="{{timeInfo.StartTime}}" required/>
+             
+            <label>Projects</label>       
+            <input ui-select2="selcetUi" ng-model="timeInfo.Projects" style="width:220px"/>
+
+            <label>Description</label>
+            <input id="description" type="text" ng-model="timeInfo.Description" />          
         </li>
+
         <input type="button" ng-click="AddHours()" class="btn-primary" value="Add Hours"/>
         <input type="button" ng-click="DelHours()" class="btn-primary" value="Delete Hours" ng-show="showDel()"/>
-        <label>Projects</label>       
-        <input ui-select2="selcetUi" ng-model="day.Projects" style="width:220px"/>
-
-        <label>Description</label>
-        <input id="description" type="text" ng-model="day.Description" />
         <input type="submit" id="submit" class="btn-primary" value="Save"/>
+       
     </form>
     
 

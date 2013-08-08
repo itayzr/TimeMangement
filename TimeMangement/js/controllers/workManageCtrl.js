@@ -1,7 +1,7 @@
 ﻿angular.module('WorkManagmentApp', ['ui.calendar', 'ui.select2'])
     .controller('WorkManagerCtrl', function ($scope, $http, $filter) {
        
-        var days = [];
+        var workEvents = [];
         var projects = [];
         var outsideProject = [];
         var projectsCounter = 1;
@@ -74,19 +74,19 @@
             });
         };
 
-        $scope.events = days;
+        $scope.events = workEvents;
         
         /* Build  3 month view */
         $scope.eventsF = function (start, end, callback) {
             var startMonth = start.getFullYear() + "-" + (start.getMonth()+1) + "-" + start.getDate();
             var thisMonth = end.getFullYear() + "-" + (end.getMonth()) + "-" + end.getDate();
             var endMonth = end.getFullYear() + "-" + (end.getMonth()+1) + "-" + end.getDate();
-            days.length = 0;
+            workEvents.length = 0;
             buildMonth(startMonth);
             if ((start.getMonth() + 1)!=end.getMonth())
                 buildMonth(thisMonth);
             buildMonth(endMonth);
-            var events = days;
+            var events = workEvents;
             callback(events);
         };
         
@@ -120,6 +120,7 @@
                 height: 650,
                 selectable: true,
                 weekMode: 'variable',
+                timeFormat: 'H:mm',
                 header: {
                     left: 'title',
                     center: '',
@@ -146,14 +147,14 @@
             var counter = projectsCounter;
             projects.length = 0;
             var temp = [];
-            angular.forEach($scope.day.Projects, function (project, index) {
+            angular.forEach($scope.day.timeinfo.Projects, function (project, index) {
                 projects.push({
                     id: counter++,
                     text: project,
                 });
             });
-            angular.copy($scope.day.Projects, temp);
-            angular.copy(projects, $scope.day.Projects);
+            angular.copy($scope.day.timeinfo.Projects, temp);
+            angular.copy(projects, $scope.day.timeinfo.Projects);
             
             /* choose only the outside projects that not already exist */
             angular.forEach(outsideProject, function (project, index) {
@@ -166,16 +167,24 @@
         /* Build month to fit event view */
         function buildMonth(date) {
             $http.get('api/WorkManageApi/GetMonth/monthReturn?=' + date).success(function (data) {
-                angular.forEach(data.Days, function (day, index) {
-                    if (day.Activity == "Work") {
-                        days.push({ title: day.Activity , start: day.Date, end: day.Date });
-                        if (day.Projects != '')
-                            days[days.length - 1].title +=" - " + day.Projects;
-                        if (day.Description != null)
-                            days[days.length - 1].title += " - " + day.Description;
-                    }  
-                    else
-                        days.push({ title: day.Activity, start: day.Date, end: day.Date, backgroundColor: '#FF7C00' });
+                angular.forEach(data.Days, function (day) {
+                    angular.forEach(day.TimeInfos, function (timeinfo) {
+                        debugger;
+                        var startHour = day.Date.split('T')[0]+ 'T' + timeinfo.StartTime + ':00';
+                        if (timeinfo.Activity == "Work") {
+                            workEvents.push({ title: timeinfo.Activity, start: startHour, end: day.Date, allDay: false });
+                            if (timeinfo.Projects != '')
+                                workEvents[workEvents.length-1].title += " - " + timeinfo.Projects;
+                            if (timeinfo.Description != null)
+                                workEvents[workEvents.length-1].title += " - " + timeinfo.Description;
+                        }
+                        else if (timeinfo.Activity == "HalfHoliday") {
+                            
+                            workEvents.push({ title: timeinfo.Activity, start: startHour, end: day.Date, backgroundColor: '#1DD300', allDay: false });
+                        }                  
+                        else
+                            workEvents.push({ title: timeinfo.Activity, start: day.Date, end: day.Date, backgroundColor: '#FF7C00' });
+                        });
                 });
             });      
         }

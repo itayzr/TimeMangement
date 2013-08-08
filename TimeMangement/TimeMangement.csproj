@@ -171,6 +171,7 @@
     <Compile Include="Helpers\AuthorizeRolesAttribute.cs" />
     <Compile Include="Helpers\DocumentStoreHolder.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Indexes\Projects_Tags.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Day.cs" />
@@ -195,6 +196,7 @@
     <Content Include="css\libs\datepicker.css" />
     <Content Include="css\libs\font-awesome.css" />
     <Content Include="css\libs\jquery.timepicker.css" />
+    <Content Include="css\libs\site.css" />
     <Content Include="css\libs\TwitterBootstrap\bootstrap.min.css" />
     <Content Include="css\libs\zebra_datepicker.css" />
     <Content Include="css\normalize.css" />

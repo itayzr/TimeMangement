@@ -50,12 +50,11 @@
 }
 
 body{
-	margin:200px;
+	margin:0;
 	color:#1c1c1c;
 	background:#e7e7e7;
 	font:13px/16px 'PTSansRegular', Arial, Helvetica, sans-serif;
 	min-width:1000px;
-    
 }
 img{border-style:none;} 
 a{
@@ -137,7 +136,7 @@ form, fieldset{
 	padding:0 0 28px;
 }
 #content{
-	width:900px;
+	width:750px;
 	float:right;
 	margin-right:1px;
 	background: url(../imgs/bg-products.gif) no-repeat;
@@ -1086,7 +1085,7 @@ article.contentPage a
 }
 .content-inner {
 	padding:20px;
-	width: 850px;
+	width: 711px;
 	margin:0 -70px 0 0;
 }
 
@@ -1499,19 +1498,8 @@ hr {
 }
 
 .product-suggestion {
-	margin-left: 100px;
+	margin-left: 10px;
 	margin-bottom: 20px;
 }
 
-.day-details {
-    float: left;
-    width: 250px
-}
-
-.calendar {
-    float: left;
-    width: 600px
-}
-
-.hours {
-}
+.validation-summary-valid { display:none; }

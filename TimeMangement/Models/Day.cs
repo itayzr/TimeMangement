@@ -13,26 +13,27 @@ namespace TimeMangement.Models
 
     public class TimeInfo
     {
-        /// <summary>
-        /// Format: HH:mm
-        /// </summary>
         public string StartTime { get; set; }
         public string FinishTime { get; set; }
+        public Activity Activity { get; set; }
+        public List<string> Projects { get; set; }
+        public string Description { get; set; }
+
+        public TimeInfo()
+        {
+            Projects = new List<string>();
+        }    
     }
 
     public class Day
     {
         public DateTime Date { get; set; }
-        public Activity Activity { get; set; } 
         public List<TimeInfo> TimeInfos { get; set; } 
-        public List<string> Projects { get; set; }
-        public string Description { get; set; }
-
+        
         public Day(DateTime today)
         {
             Date = today.Date;
-            TimeInfos = new List<TimeInfo> {new TimeInfo()};
-            Projects= new List<string>();
+            TimeInfos = new List<TimeInfo> {new TimeInfo()};      
         }
     }
 

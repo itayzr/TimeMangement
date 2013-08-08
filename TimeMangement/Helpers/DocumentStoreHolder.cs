@@ -1,7 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.Net.Sockets;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Extensions;
+using Raven.Client.Indexes;
+using TimeMangement.Indexes;
 
 namespace TimeMangement.Helpers
 {
@@ -33,9 +37,9 @@ namespace TimeMangement.Helpers
 
                 Store.Initialize();
 
-        //        IndexCreation.CreateIndexes(typeof(ContentSearchIndex).Assembly, Store);
+                new Projects_Tags().Execute(Store.DatabaseCommands.ForDatabase(TimeMangement), Store.Conventions);
 
-            //    ConfigureVersioning();
+                //    ConfigureVersioning();
             }
             catch (Exception e)
             {
