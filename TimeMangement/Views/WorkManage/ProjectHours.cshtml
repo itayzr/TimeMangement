@@ -17,7 +17,8 @@
         </div>
     </div>  
     <div  class="chartArea">
-        <button ng-click="chartSwitch()"  class="btn-info" ng-class="{on:btn.state}">{{btn.label}}</button>
+        <button ng-click="chartSwitch()"  class="btn-info" ng-class="{on:btnTable.state}">{{btnTable.label}}</button>
+        <button ng-click="totalSwitch()"  class="btn-info" ng-class="{on:btnTotal.state}">{{btnTotal.label}}</button>
         <div google-chart chart="chart" style="height:600px; "/>
     </div>
 

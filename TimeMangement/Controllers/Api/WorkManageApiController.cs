@@ -23,11 +23,6 @@ namespace TimeMangement.Controllers.Api
             var month = RavenSession.Load<Month>(docId);
             if (month == null)
             {
-//                month = new Month
-//                    {
-//                        UserName = username,
-//                    };
-//                RavenSession.Store(month, docId);
                 return new Day(day);
             }
 
@@ -50,7 +45,6 @@ namespace TimeMangement.Controllers.Api
                 {
                     UserName = username,
                 };
-                //RavenSession.Store(month, docId);
             }
 
            return month;
@@ -69,7 +63,7 @@ namespace TimeMangement.Controllers.Api
             return projects;
         }
 
-        public Dictionary<string, float> GetProjectsHours(string employee,string workMonth)
+        public Dictionary<string, float> GetProjectsHours(string employee=null,string workMonth=null)
         {
             var month = workMonth.Split('-')[1];
             var year = workMonth.Split('-')[0];
@@ -91,6 +85,16 @@ namespace TimeMangement.Controllers.Api
                 .ToDictionary(result => result.WorkMonth, result => result.ProjectHours);
             return projectHours;
         }
+
+
+//        public Dictionary<string, float> GetTotalHourPerMonth(string year=null, string employee=null)
+//        {
+////            Dictionary<string, float> totalHours = RavenSession.Query<Projects_Tags.ReduceResult, Projects_Tags>()
+////                .Where(x => x.WorkYear == year)
+////                .Where(x => x.Employee == employee)
+////                .ToDictionary(result => result.WorkMonth, result => result.ProjectHours);
+////            return totalHours;
+//        }
 
 
 

@@ -268,7 +268,7 @@ myApp.controller('WorkManagerCtrl', function ($scope, $http, $dialog) {
             backdrop: true,
             keyboard: true,
             backdropClick: true,
-            template: t, // OR: templateUrl: 'path/to/view.html',
+            template: t, 
             controller: 'TestDialogController'
         };
 
@@ -276,10 +276,7 @@ myApp.controller('WorkManagerCtrl', function ($scope, $http, $dialog) {
             description = $scope.timeInfo.Description;
             var d = $dialog.dialog(angular.extend($scope.opts));
             d.open().then(function (result) {
-                if (result) {
-                    $scope.timeInfo.Description = result;
-                }
-                
+                $scope.timeInfo.Description = result;
             });
         };
 

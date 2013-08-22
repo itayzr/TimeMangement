@@ -20,24 +20,46 @@ myApp.controller('MonthStatCtrl', function($scope, $http) {
         });
     };
 
-    $scope.btn = {
-        label: "Table",
+    $scope.btnTable = {
+        label: "Table view",
         state: false
     };
 
     $scope.chartSwitch = function () {
         if ($scope.chart != null) {
-            this.btn.state = !this.btn.state;
-            if (this.btn.state == false) {
+            this.btnTable.state = !this.btnTable.state;
+            if (this.btnTable.state == false) {
                 debugger;
-                this.btn.label = "Chart";
+                this.btnTable.label = "Chart view";
                 $scope.chart.type = "Table";
-                $scope.chart.options.width = 900;    
+                $scope.chart.options.width = 900;
             }
             else {
-                this.btn.label = "Table";
+                this.btnTable.label = "Table view";
                 $scope.chart.type = "ColumnChart";
-                $scope.chart.options.width = 1200;
+                $scope.chart.options.width = 1150;
+            }
+        }
+    };
+    
+    $scope.btnTotal = {
+        label: "Total",
+        state: false
+    };
+
+    $scope.totalSwitch = function () {
+        if ($scope.chart != null) {
+            this.btnTotal.state = !this.btnTotal.state;
+            if (this.btnTotal.state == false) {
+                debugger;
+                this.btnTotal.label = "Per Project";
+                $scope.chart.data = { "cols": $scope.dataTotal.H, "rows": $scope.dataTotal.K };
+                $scope.title = "Month total hours";
+            }
+            else {
+                this.btnTotal.label = "Total";
+                $scope.chart.data = { "cols": $scope.data.H, "rows": $scope.data.K };
+                $scope.title = "Projects hours per month";
             }
         }
     };
@@ -99,15 +121,17 @@ myApp.controller('MonthStatCtrl', function($scope, $http) {
 
     function buildChart() {
         var workYear = $scope.selecedMonth.split('-')[0];
-        $scope.btn.label = "Table";
-        $scope.btn.state = false;
+        $scope.btnTable.label = "Table view";
+        $scope.btnTable.state = false;
+        $scope.btnTotal.label = "Total";
+        $scope.btnTotal.state = false;
         var chart1 = {};
         chart1.type = "ColumnChart";
         chart1.displayed = true;
+        $scope.title = "Projects hours per month";
         chart1.options = {
-            "title": "Projects hours per month - " + workYear + " - " + $scope.employee,
             "isStacked": "false",
-            "width": 1200,
+            "width": 1150,
             "fill": 10,
             "animation":{
                    "duration": 2000,
@@ -126,9 +150,13 @@ myApp.controller('MonthStatCtrl', function($scope, $http) {
     }
         };
 
-        var data = new google.visualization.DataTable();
+        $scope.data = new google.visualization.DataTable();
+        $scope.dataTotal = new google.visualization.DataTable();
         var dt = [];
-        data.addColumn('string', 'Month');
+        var totalHours = [];
+        $scope.data.addColumn('string', 'Month');
+        $scope.dataTotal.addColumn('string', 'Month');
+        $scope.dataTotal.addColumn('number', 'Total');
         var month = new Array();
         month[0] = "January";
         month[1] = "February";
@@ -144,25 +172,31 @@ myApp.controller('MonthStatCtrl', function($scope, $http) {
         month[11] = "December";
         for (var i = 0; i < 12; i++) {    
             dt.push([month[i]]);
+            totalHours.push([month[i]]);
         }
-
+        for (var i = 0; i < 12; i++) {
+            totalHours[i].push(0);
+        }
         $http.get('/api/WorkManageApi/GetProjects/emp?=' + $scope.employee).success(function (projects) {
             var flag = projects.length;
             angular.forEach(projects, function (prj) {
                 $http.get('/api/WorkManageApi/GetProjectHourPerMonth/' +workYear + '/' + $scope.employee + '/' + prj).success(function (prjHours) {
-                    data.addColumn('number', prj);
+                    $scope.data.addColumn('number', prj);
                     for (var i = 0; i < 12; i++) {
                         dt[i].push(0);
                     }
                     angular.forEach(prjHours, function (hours, month) {
                         var index = parseInt(month) - 1;
                         dt[index][dt[index].length - 1] = hours;
+                        totalHours[index][1] = totalHours[index][1] + hours;
                     });
                     flag--;
                     if (flag == 0) {
-                        data.addRows(dt);
-                        chart1.data = { "cols": data.H, "rows": data.K };
+                        $scope.data.addRows(dt);
+                        $scope.dataTotal.addRows(totalHours);
+                        chart1.data = { "cols": $scope.data.H, "rows": $scope.data.K };
                         $scope.chart = chart1;
+                        $scope.chart.options.title = $scope.title + " - " + workYear + " - " + $scope.employee;
                     }
                 });
             });
