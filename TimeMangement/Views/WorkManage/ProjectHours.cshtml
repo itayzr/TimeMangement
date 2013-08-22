@@ -1,0 +1,30 @@
+﻿<h2 class="page-header">Projects-Hours</h2>
+<div ng-controller="MonthStatCtrl">
+    @Html.ActionLink("Index","Index","WorkManage")
+    <div class="selectMonth">
+        <label>Select Month</label>
+        <input type="month" id="selectMonth" class="input-medium" ng-model="selecedMonth" ng-change="changeMonth()" autofocus=""> 
+        <label>Select Employee</label>
+        <select class="input-medium" ng-model="employee" ng-options="e for e in employees" ng-change="changeEmployee()" style="width: 165px"></select>
+       
+    </div>
+    <div class="monthStat" class>
+        <button ng-click="prev()" class="fc-button-prev" ><</button>
+        <button ng-click="next()" class="fc-button-next" >></button>
+        <div class="gridStyle" ng-grid="gridOptions"></div>
+        <div class="totalMonth">
+            <label class="totallabel">Total month hours: {{totalMonth}}</label>
+        </div>
+    </div>  
+    <div  class="chartArea">
+        <button ng-click="chartSwitch()"  class="btn-info" ng-class="{on:btn.state}">{{btn.label}}</button>
+        <div google-chart chart="chart" style="height:600px; "/>
+    </div>
+
+   
+</div>
+
+@section FooterSection
+{
+ 
+}

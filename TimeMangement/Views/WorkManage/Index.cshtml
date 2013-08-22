@@ -1,45 +1,51 @@
-﻿<h2>Work Hours</h2>
+﻿<h2 class="page-header">Work Hours</h2>
+@Html.ActionLink("ProjectHours","ProjectHours","WorkManage")
 <div ng-controller="WorkManagerCtrl">
-<div class="day-details">
-    <form  ng-submit="submit()">
-        <label>Date</label>
-        <input type="date" ng-model="selectedDay" ng-change="ChangeDay()"  > 
-        <li ng-repeat="timeInfo in day.TimeInfos" style="list-style: none; ">
-            <label>Activities</label>
-            <select ng-model="timeInfo.Activity">
+
+    <div class="day-details">
+        <form  ng-submit="submit()">
+            <label>Date</label>
+            <input type="date" ng-model="selectedDay" class="input-medium" ng-change="ChangeDay()"  > 
+            <label>Activity</label>
+            <select ng-model="timeInfo.Activity" style="width: 165px">
                 <option value="Work">Work</option>
                 <option value="Holiday">Holiday</option>
                 <option value="HalfHoliday">HalfHoliday</option>
             </select>
-            <label>StartTime</label>
-            <input type="time" name="startTime" ng-model="timeInfo.StartTime"  required/>
-            <label>FinishTime</label>
-            <input type="time" name="finishTime" ng-model="timeInfo.FinishTime" min="{{timeInfo.StartTime}}" required/>
+            <div ng-show="showHours()">
+                <label>StartTime</label>
+                <input type="time" step="300" id="start" name="startTime" ng-model="timeInfo.StartTime" class="input-medium" min="" required/>
+                <label>FinishTime</label>
+                <input type="time" step="300" name="finishTime" ng-model="timeInfo.FinishTime" class="input-medium" min="{{timeInfo.StartTime}}" required/>
              
-            <label>Projects</label>       
-            <input ui-select2="selcetUi" ng-model="timeInfo.Projects" style="width:220px"/>
+                <label>Projects</label>       
+                <input ui-select2="selcetUi" class="input-medium" ng-model="timeInfo.Project" style="width: 165px" required/>
 
-            <label>Description</label>
-            <input id="description" type="text" ng-model="timeInfo.Description" />          
-        </li>
-
-        <input type="button" ng-click="AddHours()" class="btn-primary" value="Add Hours"/>
-        <input type="button" ng-click="DelHours()" class="btn-primary" value="Delete Hours" ng-show="showDel()"/>
-        <input type="submit" id="submit" class="btn-primary" value="Save"/>
-       
-    </form>
+                <label>Description</label>
+                <textarea id="description" ng-model="timeInfo.Description" class="text-area" placeholder="Describe what you did" data-ng-dblclick="openEditor(timeInfo.Description)"
+                    tooltip="Double click to open editor" 
+                    tooltip-trigger="focus"
+                    tooltip-placement="left"></textarea> 
+            </div>   
+            <input type="submit" id="submit" class="btn-primary" value="Save"/>
+            <input type="button" ng-click="DelActivity()" class="btn-primary" value="Delete" ng-show="showDel()"/>
+ 
+        </form>
+    </div>
+    <div ui-calendar="uiConfig.calendar" ng-model="eventSources" class="calendar" calendar="myCalendar" ></div>
     
+   
 
 </div>
-    <div ui-calendar="uiConfig.calendar" ng-model="eventSources" class="calendar" calendar="myCalendar" >
 
-</div>
+
+
 
 
 
 
 @section FooterSection
 {
-
-
+  
+    
 }

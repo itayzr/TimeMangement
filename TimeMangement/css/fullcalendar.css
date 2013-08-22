@@ -130,11 +130,40 @@ html .fc,
 	filter: alpha(opacity=30); /* for IE */
 	}
 
-.fc-fri { background: lightgoldenrodyellow; }
+    .fc-fri {   background-image: linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -o-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -moz-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -webkit-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -ms-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
 
-.fc-sat { background: lightgoldenrodyellow;  }
+                background-image: -webkit-gradient(
+	                linear,
+	                left bottom,
+	                left top,
+	                color-stop(0.42, rgb(125,193,248)),
+	                color-stop(0.71, rgb(163,232,255))
+               );
+                opacity: .8;
+        }
+
+
+.fc-sat{   background-image: linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -o-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -moz-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -webkit-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+                background-image: -ms-linear-gradient(bottom, rgb(125,193,248) 42%, rgb(163,232,255) 71%);
+
+                background-image: -webkit-gradient(
+	                linear,
+	                left bottom,
+	                left top,
+	                color-stop(0.42, rgb(125,193,248)),
+	                color-stop(0.71, rgb(163,232,255))
+               );
+                opacity: .8;
+        }
+
 	
-
 
 /* Buttons
 ------------------------------------------------------------------------*/

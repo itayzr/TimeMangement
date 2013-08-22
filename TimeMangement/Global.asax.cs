@@ -26,6 +26,18 @@ namespace TimeMangement
             DocumentStoreHolder.Initialize();
         }
 
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new { controller = "WorkManage", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+            );
+
+        }
+
 
 
       //  public static IDocumentStore DocumentStore { get; private set; }

@@ -20,6 +20,25 @@ namespace TimeMangement
             routeTemplate: "api/{controller}/{action}",
             defaults: new { action = "Get" }
         );
+
+
+
+            config.Routes.MapHttpRoute(
+            name: "GetProjects",
+            routeTemplate: "api/{controller}/{action}/{employee}/{workMonth}",
+            defaults: null
+
+             );
+
+            config.Routes.MapHttpRoute(
+            name: "GetProjectsPerMonth",
+            routeTemplate: "api/{controller}/{action}/{year}/{employee}/{prj}",
+            defaults: null
+
+             );
+
+
+
         }
     }
 }

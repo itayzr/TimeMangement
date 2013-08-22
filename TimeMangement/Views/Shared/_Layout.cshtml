@@ -27,7 +27,7 @@
                     }
                     <div class="header-frame">
                         <h1 class="logo">@Html.ActionLink("Hibernating Rhinos", "Index", "Home")</h1>
-                        <div class="slogan"><span>Work hours management</span></div>
+                        @*                        <div class="slogan"><span>Work hours management</span></div>*@
                     </div>
                 
                 </div>
@@ -43,31 +43,32 @@
             </div>
 
         </div>
+        
+        <link href="~/css/theme.css" rel="stylesheet" />
         <link href="~/css/select2.css" rel="stylesheet" />
         <link href="~/css/fullcalendar.css" rel="stylesheet" />
-        <link href="~/css/libs/datepicker.css" rel="stylesheet" />
-
+        <link href="~/css/ng-grid.css" rel="stylesheet" />
+        
+        <script src="//www.google.com/jsapi"></script>
         <script src="~/js/libs/jquery/jquery-1.10.1.js"></script>
         <script src="~/js/libs/jquery-ui.js"></script>
         <script src="~/js/select2.js"></script>
-       
         <script src="~/js/angular.js"></script>
+        <script src="~/js/libs/bootstrap.js"></script>  
+        <script src="~/js/angular-ui/ui-bootstrap-tpls-0.5.0.js"></script>
         <script src="~/js/angular-ui/select2.js"></script>
-   
         <script src="~/js/libs/fullcalendar.js"></script>
-        
-
-    
-
         <script src="~/js/libs/gcal.js"></script>
         <script src="~/js/libs/calendar.js"></script>
-    
-
+        <script src="~/js/ng-grid.js"></script>
+        <script src="~/js/ng-google-chart.js"></script>
+        <script src="~/js/libs/jquery/sample.js"></script>
+        
+        <script src="~/js/libs/appstart.js"></script>
         <script src="~/js/controllers/WorkManageCtrl.js"></script>
+        <script src="~/js/controllers/MonthStatCtrl.js"></script>
         
 
-        <script src="~/js/libs/bootstrap.js"></script>  
-        <script src="~/js/bootstrap-datepicker.js"></script>
 
         @RenderSection("FooterSection", false)
 </body>

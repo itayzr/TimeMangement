@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head id="Head1">
+
+    <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+
+    <script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-11361997-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><meta name="description" content="Home of the NHibernate Profiler, a powerful developer tool." /><meta name="keywords" content="NHibernate Profiler, NHibernate Performance" /><title>
+	The NHibernate Profiler
+</title>
+    <link rel="stylesheet" type="text/css" href="http://nhprof.com/Assets/Css/site.css" />
+    <link id="Rsd" rel="EditURI" type="application/rsd+xml" title="RSD" href="http://nhprof.com/Rsd.aspx" />
+    <meta name="Distribution" content="Global" /><meta name="Robots" content="index,follow" />
+    <style type="text/css">
+        .style1
+        {
+            font-weight: bold;
+            background-repeat: inherit;
+            background-attachment: inherit;
+            background-position: inherit;
+        }
+    </style>
+
+    <script type="text/javascript" src="http://nhprof.com/Assets/Scripts/jquery-1.2.6.js"></script>
+    <script type="text/javascript" src="http://nhprof.com/Assets/Scripts/jquery.querystring.js"></script>
+
+    <script type="text/javascript" src="http://nhprof.com/Assets/Scripts/jquery.validate.js"></script>
+
+    
+
+<script type="text/javascript">
+    window.onload = function(){
+     document.location = 'http://builds.hibernatingrhinos.com/downloadlatest/NHProf';
+    }
+    </script>
+</head>
+<body>
+    <div class="logo logo-inner" style="font-size: small">
+        <a href="http://nhprof.com/">For NHibernate</a>
+    </div>
+ 
+    <div class="header-container">
+        <div class="nav-main">
+            
+            <h1 class="main-header">
+                <a href="http://nhprof.com/">NHibernate Profiler</a></h1>
+            <h2 class="sub-header">
+                Real-time visual debugger for NHibernate</h2>
+        </div>
+    </div>
+    <div id="header">
+        
+            <div class="customform" id="searchForm">
+                <form name="searchForm" action="http://nhprof.com/Home/Search" method="get">
+                <input type="text" name="q" class="search-textbox" />
+                <input type="submit" class="search-button" value="Search" />
+                </form>
+            </div>
+        
+    </div>
+    <!-- wrap starts here -->
+    <div id="wrap">
+        <!-- content-wrap starts here -->
+        <div id="content-wrap">
+            <div class="arrowlistmenu">
+                <h1 class='menuheader'>
+<a href='http://nhprof.com/home'>home</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/ScreenShots'>Screen Shots</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/Download'>Download</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/Trial'>Trial</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/Testimonials'>Testimonials</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/Buy'>Buy</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/CommercialSupport'>Commercial Support</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/ContactUs'>Contact Us</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/Learn'>Learn</a>
+</h1>
+<ul class='categoryitems'>
+<li>
+<a href='http://nhprof.com/Learn/Alerts'>Alerts</a>
+</li>
+<li>
+<a href='http://nhprof.com/Learn/Usage'>Usage</a>
+</li>
+<li>
+<a href='http://nhprof.com/Learn/Faq'>Faq</a>
+</li>
+<li>
+<a href='http://nhprof.com/Learn/GettingStarted'>Getting Started</a>
+</li>
+<li>
+<a href='http://nhprof.com/learn/ShortcutKeys'>Shortcut Keys</a>
+</li>
+<li>
+<a href='http://nhprof.com/learn/ProgramaticAccess'>Programatic Access</a>
+</li>
+<li>
+<a href='http://nhprof.com/learn/ContinuousIntegration'>Continuous Integration</a>
+</li>
+</ul>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/Support'>Support</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/About'>About</a>
+</h1>
+
+<h1 class='menuheader'>
+<a href='http://nhprof.com/License'>License</a>
+</h1>
+
+
+<h1 class='menuheader'>
+	<a href="/ReportExport.html" style="color: red">Live HTML demo!</a>
+</h1>
+<div class="content-side" style="text-align: center">
+    <a href="/CommercialSupport">
+        <img src="http://nhprof.com/Content/Images/NHibernateCommercialSupport.png" alt="Commercial Support">
+    </a><a href="/CommercialSupport">Use our expertise</a>
+</div>
+            </div>
+            <div id="main">
+                
+	<h1>Thank you for downloading NHibernate Profiler!
+	</h1>
+
+Download should start automatically. If you experience any problems, please try using <a href="http://builds.hibernatingrhinos.com/downloadlatest/NHProf">this direct link</a>.
+<div>
+<h2>Customers speaking</h2>
+<p>Franck Quintana - <a href="http://www.ifacture.fr/">iFacture</a></p>
+
+<blockquote>I recently purchased NHibernate Profiler after using NHibernate in one of our projects. The product is awesome and very well adapted to different configurations. It can be configured only on debug mode which allows us to only activate statistics on a development environment without modifying any code. We used it to know how NHibernate processed our queries and we found out all the application bottlenecks. Thus, if you care about performance tuning and product quality, this product is a must-have inside your toolbox. Moreover, the special beta offer makes the product an interesting deal. So what are you waiting for?</blockquote>
+</div>
+
+	<div id="divRegister">
+	
+		<h2>Daily Builds</h2>
+		<div style="font-size: small">
+		You can also visit our <a href="http://builds.hibernatingrhinos.com/builds/NHProf">daily build site</a> to check for fresh bits.
+		</div>
+		<span id="registerMessage" class="message" style="display: none"></span>
+		<div id="registerFollowLink" style="display: none;">
+			<a href="http://nhprof.com/Learn">Get started</a>
+		</div>
+	</div>
+
+            </div>
+            <!-- content-wrap ends here -->
+        </div>
+        <!-- wrap ends here -->
+    </div>
+    <!-- footer starts here -->
+    <div id="footer">
+        <p>
+            <strong><a href="http://hibernatingrhinos.com">Hibernating Rhinos</a></strong> &copy;
+            copyright 2009 - 2011
+        </p>
+    </div>
+    <!-- footer ends here -->
+</body>
+</html>

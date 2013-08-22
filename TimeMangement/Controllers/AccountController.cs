@@ -28,7 +28,7 @@ namespace TimeMangement.Controllers
         public ActionResult LogIn()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "WorkManage");
 
             return View();
         }
@@ -51,7 +51,7 @@ namespace TimeMangement.Controllers
                     return Redirect(returnUrl);
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "WorkManage");
             }
 
             // If we got this far, something failed, redisplay form
@@ -64,7 +64,7 @@ namespace TimeMangement.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "WorkManage");
         }
 
         [GET("account/register")]
